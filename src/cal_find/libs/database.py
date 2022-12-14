@@ -1,4 +1,6 @@
 import numpy as np
+import pandas as pd
+import scipy.io as sio
 
 from pathlib import Path
 from datetime import datetime
@@ -41,9 +43,13 @@ def convert_delay_line_restrictions(conversion_path: Path):
         # Note: Test-file load
         azimuth, altitude = np.load(npy_file, allow_pickle=True)
 
+def convert_dat_to_mongo_db(conversion_path):
+    save_data = sio.readsav(conversion_path)
+    df = pd.DataFrame(save_data["calcat"])
+    print(df.columns)
 
 if __name__ == "__main__":
-    conversion_path = Path(__file__).parents[1] \
-            / "data/delay_line_restrictions" / "individual"
-    convert_delay_line_restrictions(conversion_path)
+    conversion_path = Path(__file__).parents[3] \
+            / "data" / "calibrator_catalogues" / "midi_cat_2019.dat"
+    convert_dat_to_mongo_db(conversion_path)
 
