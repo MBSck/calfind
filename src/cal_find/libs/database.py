@@ -1,7 +1,9 @@
+import sqlite3
 import numpy as np
 import pandas as pd
 import scipy.io as sio
 
+from typing import List
 from pathlib import Path
 from datetime import datetime
 
@@ -48,8 +50,44 @@ def convert_dat_to_mongo_db(conversion_path):
     df = pd.DataFrame(save_data["calcat"])
     print(df.columns)
 
+
+class SQLiteDatabase:
+    """A context manager for the 'sqlite3'-package that automatically closes the
+    connection and returns dictionaries instead of tuples"""
+    def __init__(self, database_path: Path) -> None:
+        """"""
+        self.database_path = database_path
+        self.connection, self.row_factory, self.cursor = None, None, None
+
+    def __enter__(self):
+        """"""
+        self.connection = sqlite3.connect(database_path)
+        self.connection.row_factory = sqlite3.Row
+        self.cursor = self.connection.cursor()
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_traceback) -> None:
+        """"""
+        self.connection.close()
+
+    def create_table(self, title: str, columns: List[str]) -> None:
+        """Creates a table in the database
+
+        Parameters
+        ----------
+        title: str
+            The table's title
+        columns: List[str]
+            The table's columns
+        """
+        create_table_command = f"CREATE TABLE {title.lower()}"\
+                f"({', '.join([column.lower() for column in columns])})"
+        self.cursor.execute(create_table_command)
+
+
 if __name__ == "__main__":
     conversion_path = Path(__file__).parents[3] \
             / "data" / "calibrator_catalogues" / "midi_cat_2019.dat"
-    convert_dat_to_mongo_db(conversion_path)
+    # convert_dat_to_mongo_db(conversion_path)
+    sql = SQLiteDatabase("hello")
 
