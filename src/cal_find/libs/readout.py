@@ -21,15 +21,15 @@ def get_delay_line_restrictions(array_configuration: str):
 
     Returns
     -------
-    azimuth: np.ndarray
     altitude: np.ndarray
+    azimuth: np.ndarray
     """
-    delay_restriction_file = Path(__file__).parents[1] / "data/delay_line_restrictions" \
+    delay_restriction_file = Path(__file__).parents[3] / "data/delay_line_restrictions" \
             / "combined" / f"{DELAY_LINES[array_configuration]}.npy"
-    return np.load(delay_restriction_file, allow_pickle=True)
+    return np.load(delay_restriction_file, allow_pickle=True)[::-1]
 
 
 if __name__ == "__main__":
-    az, alt = get_delay_line_restrictions("small")
-    print(az, alt, sep="\n\n")
+    alt, az = get_delay_line_restrictions("small")
+    print(alt, az, sep="\n\n")
 

@@ -41,7 +41,7 @@ class Target:
         night: SkyCoord
             The coordinates of the target for a night
         """
-        ...
+        return get_altitude_and_azimuth
 
     def check_observability(self, time, array_configuration: str):
         azimuth_and_altitude = self.get_altitude_and_azimuth(time)

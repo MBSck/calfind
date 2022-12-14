@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cal_find"
+version = "0.0.1"
+description = "Finds calibrators for science targets for MATISSE"
+requires-python = ">=3.9"
+readme = "README.md"
+#license = {file = "LICENSE"}
+
+keywords = ["astronomy", "protoplanetary discs", "observation"]
+authors = [
+	{name = "M. B. Scheuck", email = "martenscheuck@gmail.com"}
+]
+
+classifiers = [
+	"Development Status :: 1 - Planning",
+	"Framework :: Pytest",
+	"Framework :: Sphinx",
+	"Natural Language :: English",
+	"Operating System :: OS Independent",
+	"Programming Language :: Python :: 3",
+	"Programming Language :: Python :: 3.9",
+	"Topic :: Scientific/Engineering :: Astronomy",
+	"Topic :: Scientific/Engineering :: Physics",
+]
+
+dependencies = [
+    "astropy==5.1.1",
+    "numpy==1.23.5",
+    "packaging==22.0",
+    "pandas==1.5.2",
+    "pyerfa==2.0.0.1",
+    "python-dateutil==2.8.2",
+    "pytz==2022.6",
+    "PyYAML==6.0",
+    "scipy==1.9.3",
+    "six==1.16.0",
+]
+
+[project.urls]
+repository = "https://github.com/MBSck/calibrator_find"

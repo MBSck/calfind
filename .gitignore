@@ -1,3 +1,6 @@
 # Folders to ignore
 data/calibrator_catalogues/
-data/delay_line_restrictions
+data/delay_line_restrictions/
+
+# Ignore build of package
+*.egg-info/

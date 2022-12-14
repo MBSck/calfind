@@ -58,7 +58,6 @@ def convert_utc_to_julian_datetime(time: str) -> np.float64:
     return Time(time, format="isot", scale="utc").jd
 
 
-# TODO: Think of how to implement the time in the functions
 def convert_utc_to_mean_sidereal_time(observatory_name: str,
                                       time: str) -> coordinates.angles.Longitude:
     """Converts UTC-datetime to the mean sidereal time at the given location
@@ -133,5 +132,4 @@ if __name__ == "__main__":
     target = Target("HD72106B", "paranal")
     # print(target.get_altitude_and_azimuth(get_midnight()).separation())
     print(target.get_altitude_and_azimuth(get_midnight()))
-
 
