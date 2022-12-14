@@ -1,0 +1,47 @@
+[min_F10]
+# Brightness treshold for calibrators
+
+[min_F10.UTs]
+value = 1.0
+unit = "Jy"
+
+[min_F10.ATs]
+value = 10.0
+unit = "Jy"
+
+
+[maximum_distances]
+
+[maximum_distances.azimuthal]
+value = 180.0
+unit = "deg"
+
+
+[maximum_distances.airmass]
+# Time weighted
+value = 1.3
+unit = "dimensionless"
+
+
+[maximum_distances.angular]
+value = 50.0
+unit = "deg"
+
+[miscellaneous]
+# If true, then science target names are plotted
+names = true
+
+# If true, then all science targets are plotted
+all_sci = true
+
+# Minimum H-band visibility for FINITO to work
+finito_Hvis_limit = 0.15
+
+# Calculate airmass from present to n_hours
+n_hours = 3.0
+
+# The closest n_cals calibrators are chosen
+n_cals = 10
+
+# Clock correction in seconds
+clock_correction = 0.0
