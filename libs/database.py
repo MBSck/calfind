@@ -4,8 +4,15 @@ from pathlib import Path
 from datetime import datetime
 
 
-def convert_hzn_to_npy(conversion_path: Path):
-    """Reads a (.hzn)-file out and saves the output as a (.npy)-file"""
+def convert_delay_line_restrictions(conversion_path: Path):
+    """Reads the delay line restriction from a (.hzn)-file out and saves the output as a
+    (.npy)-file with a comment in form of a (.txt)-file
+
+    Parameters
+    ----------
+    conversion_path: Path
+        The path where the files for conversion reside
+    """
     files_to_convert = conversion_path.glob("*.hzn")
     for hzn_file in files_to_convert:
         print(f"Working on file: {hzn_file}")
@@ -38,5 +45,5 @@ def convert_hzn_to_npy(conversion_path: Path):
 if __name__ == "__main__":
     conversion_path = Path(__file__).parents[1] \
             / "data/delay_line_restrictions" / "individual"
-    convert_hzn_to_npy(conversion_path)
+    convert_delay_line_restrictions(conversion_path)
 
