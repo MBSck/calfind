@@ -4,3 +4,4 @@ data/delay_line_restrictions/
 
 # Ignore build of package
 *.egg-info/
+__pycache__/

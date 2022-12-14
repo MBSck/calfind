@@ -3,6 +3,7 @@ import astropy.units as u
 
 from scipy.special import j1
 from datetime import datetime, timedelta
+from typing import List, Optional
 from astropy.time import Time
 from astropy import coordinates
 from astropy.coordinates import SkyCoord, EarthLocation
@@ -129,7 +130,5 @@ def get_midnight():
 
 
 if __name__ == "__main__":
-    target = Target("HD72106B", "paranal")
-    # print(target.get_altitude_and_azimuth(get_midnight()).separation())
-    print(target.get_altitude_and_azimuth(get_midnight()))
+    ...
 
