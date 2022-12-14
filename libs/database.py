@@ -1,5 +1,42 @@
-import pandas as pd
+import numpy as np
+
+from pathlib import Path
+from datetime import datetime
+
+
+def convert_hzn_to_npy(conversion_path: Path):
+    """Reads a (.hzn)-file out and saves the output as a (.npy)-file"""
+    files_to_convert = conversion_path.glob("*.hzn")
+    for hzn_file in files_to_convert:
+        print(f"Working on file: {hzn_file}")
+        with open(hzn_file, "r+") as hzn_f:
+            azimuth, altitude, comments = [], [], []
+            for line in hzn_f:
+                if line.startswith("#"):
+                    comments.append(line.split("#")[1].strip()+"\n")
+                else:
+                    az, alt = line.strip().split()
+                    azimuth.append(az)
+                    altitude.append(alt)
+        azimuth, altitude = map(lambda x: np.array(x, dtype=float), (azimuth, altitude))
+        with open(conversion_path / (Path(hzn_file).stem+"_info.txt"), "w+") as txt_file:
+            txt_file.write("Converted (.hzn)-file to (.npy)-array storage\n")
+            txt_file.write(f"Date of conversion: {datetime.utcnow()} UTC\n")
+            txt_file.write("Format is Azimuthal [deg East-of-North] and Altitude [deg]\n")
+            txt_file.write("Readout with 'az, alt = np.load(<file_name>)'\n")
+            txt_file.write("------------------------\n")
+            txt_file.write("INFO OLD\n")
+            txt_file.write("------------------------\n")
+            txt_file.writelines(comments)
+        npy_file = conversion_path / (Path(hzn_file).stem+".npy")
+        np.save(npy_file, np.array([azimuth, altitude], dtype=object))
+
+        # Note: Test-file load
+        azimuth, altitude = np.load(npy_file, allow_pickle=True)
 
 
 if __name__ == "__main__":
-    ...
+    conversion_path = Path(__file__).parents[1] \
+            / "data/delay_line_restrictions" / "individual"
+    convert_hzn_to_npy(conversion_path)
+
