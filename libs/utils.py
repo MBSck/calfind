@@ -1,66 +1,11 @@
 import numpy as np
 import astropy.units as u
 
-from typing import List, Optional
 from scipy.special import j1
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 from astropy.time import Time
 from astropy import coordinates
-from astropy.coordinates import SkyCoord, EarthLocation, AltAz
-
-
-# TODO: Maybe change this class to accept more than one target?
-class Target:
-    """"""
-    def __init__(self, name: str, observatory_name: str) -> None:
-        self.name = name
-        self.coordinates = SkyCoord.from_name(self.name)
-        self.location = EarthLocation.of_site(observatory_name)
-
-    def get_altitude_and_azimuth(self, time: str):
-        """
-
-        Parameters
-        ----------
-        time: str
-
-        Returns
-        -------
-        azimuth_and_altitude: SkyCoord[u.deg, u.deg]
-        """
-        return self.coordinates.transform_to(AltAz(obstime=Time(time),
-                                                   location=self.location))
-
-    # TODO: Think of passing the whole target for the hours and such? Not only the airmass?
-    # TODO: Check that the midnight does not go back by an entire day, but is always the
-    # coming one
-    # TODO: Find a way not to use time here for midnight
-    # TODO: Add timespan here
-    def get_time_interval(self, period: Optional[List[int]] = [-4, 4]):
-        """Calculates azimuth for a timeframe
-
-        Parameters
-        ----------
-        period: List[int], optional
-            The time period where the target azimuth should be calculated
-
-        Returns
-        -------
-        night: SkyCoord
-            The coordinates of the target for a night
-        """
-        sampling = np.diff(period)[0]//2*100 if np.diff(period)[0]//2*100 >= 100 else 100
-        return Time(get_midnight())+np.linspace(*period, sampling)*u.hour
-
-    def check_observability(self, time, delay_restrictions):
-        azimuth_and_altitude = self.get_altitude_and_azimuth(time)
-        ...
-
-    def get_airmass(self, period: Optional[List[int]] = [-4, 4]):
-        return self.get_night(period).sezc
-
-    def compare(self, other: Target):
-        ...
+from astropy.coordinates import SkyCoord, EarthLocation
 
 
 @u.quantity_input
@@ -186,6 +131,7 @@ def get_midnight():
 
 if __name__ == "__main__":
     target = Target("HD72106B", "paranal")
-    print(target.get_altitude_and_azimuth(get_midnight()).separation())
+    # print(target.get_altitude_and_azimuth(get_midnight()).separation())
+    print(target.get_altitude_and_azimuth(get_midnight()))
 
 
