@@ -3,16 +3,16 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cal_find"
-version = "0.0.1"
-description = "Finds calibrators for science targets for MATISSE"
+name = "calfind"
+version = "0.1.0"
+description = "Finds calibrators for science targets for the MATISSE-instrument"
 requires-python = ">=3.9"
 readme = "README.md"
-#license = {file = "LICENSE"}
+license = {file = "LICENSE"}
 
-keywords = ["astronomy", "protoplanetary discs", "observation"]
+keywords = ["astronomy", "protoplanetary discs", "observation-preparation", "observation"]
 authors = [
-	{name = "M. B. Scheuck", email = "martenscheuck@gmail.com"}
+	{name = "Marten Scheuck", email = "martenscheuck@gmail.com"}
 ]
 
 classifiers = [
@@ -28,16 +28,15 @@ classifiers = [
 ]
 
 dependencies = [
-    "astropy==5.1.1",
-    "numpy==1.23.5",
+    "astropy>=5.1.1",
+    "numpy>=1.23.5",
     "packaging==22.0",
-    "pandas==1.5.2",
+    "pandas>=1.5.2",
     "pyerfa==2.0.0.1",
     "python-dateutil==2.8.2",
     "pytz==2022.6",
-    "PyYAML==6.0",
-    "scipy==1.9.3",
-    "six==1.16.0",
+    "PyYAML>=6.0",
+    "scipy>=1.9.3",
 ]
 
 [project.urls]

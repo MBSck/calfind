@@ -1,7 +1,6 @@
 # Folders to ignore
-data/calibrator_catalogues/
-data/delay_line_restrictions/
-
-# Ignore build of package
 *.egg-info/
 __pycache__/
+
+# Folders to ignore until converted and stored in Large-file storage
+calfind/data/
